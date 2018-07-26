@@ -10,4 +10,4 @@ function factorial(n) {
 
 n = +prompt("Введите число");
 
-alert(factorial(n));
+alert(factorial(n));	
