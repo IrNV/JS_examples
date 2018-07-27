@@ -21,7 +21,7 @@ describe("pow", function() {
   		assert(isNaN(pow(2, -3)));
   	});
 
-  	it("При отрицательной дробной степени возвращает NaN", function() {
+  	it("При дробной степени возвращает NaN", function() {
   		assert(isNaN(pow(2, 1.5)));
   	});
 
