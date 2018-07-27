@@ -1,11 +1,14 @@
 describe("pow", function() {
 
-  it("при возведении 2 в 3-ю степень получаем 8", function() {
-    assert.equal(pow(2, 3), 8);
-  });
+  function makeTest(x) {
+    var expected = x * x * x;
+    it("при возведении " + x + " в степень 3 результат: " + expected, function() {
+      assert.equal(pow(x, 3), expected);
+    });
+  }
 
-  it("При возведении 10 в 2-ю степень получаем 100", function() {
-  	assert.equal(pow(10, 2), 100);
-  })
+  for (var x = 1; x <= 10; x++) {
+    makeTest(x);
+  }
 
 });
