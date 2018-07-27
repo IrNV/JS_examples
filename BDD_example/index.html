@@ -24,8 +24,18 @@
 <body>
 
   <script>
+    function isPositiveNum(n) {
+      return (n > 0) ? true : false;
+    }
+
+    function isInteger(n) {
+      return ((n % 1) === 0) ? true : false;
+    }
+
     function pow(x, n) {
       var result = 1;
+
+      if (!(x && n) || !isPositiveNum(n) || !isInteger(n)) return NaN;
 
       for(i = 0; i < n; i++) {
         result *= x;
