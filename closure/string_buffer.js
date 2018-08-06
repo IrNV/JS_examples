@@ -11,11 +11,18 @@
 function makeBuffer() {
 	var buffer = "";
 
-	return function(text) {
+	function stringBuffer(text) {
 		if (arguments.length == 0) return buffer;
 
 		buffer += text; 
 	}
+
+	// Добавляем функцию очистки буфера.
+	stringBuffer.clear = function() { 
+		buffer = "";
+	}
+
+	return stringBuffer;
 }
 
 var buffer = makeBuffer();
@@ -24,5 +31,9 @@ var buffer = makeBuffer();
 buffer('Пример');
 buffer(' Использования');
 buffer(' Замыкания');
+
+alert( buffer() );
+
+buffer.clear();
 
 alert( buffer() );
