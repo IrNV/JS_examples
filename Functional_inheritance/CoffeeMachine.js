@@ -1,5 +1,6 @@
 /*
   В коде CoffeeMachine сделайте так, чтобы метод run выводил ошибку, если кофеварка выключена.
+  Добавить возможность выключать кофеварку. При остановке выключать процесс варки.
 */
 function Machine(power) {
   this._enabled = false;
@@ -19,17 +20,18 @@ function Machine(power) {
 function CoffeeMachine(power) {
   Machine.apply(this, arguments);
 
+  var timerId = null;
   var waterAmount = 0;
 
   this.setWaterAmount = function(amount) {
     waterAmount = amount;
   };
 
-  var parentEnable = this.enable;
-  this.enable = function() {
-      parentEnable(); // теперь можно вызывать как угодно, this не важен
-      this.run();
-    }
+  var parentDisable = this.disable;
+  this.disable = function() {
+    clearTimeout(timerId);
+    parentDisable();
+  }
 
   function onReady() {
     alert( 'Кофе готово!' );
@@ -37,7 +39,7 @@ function CoffeeMachine(power) {
 
   this.run = function() {
     if (this._enabled) {
-      setTimeout(onReady, 1000);
+      timerId = setTimeout(onReady, 1000);
     } else {
       alert("ошибка, кофеварка выключена!");
     }
@@ -46,4 +48,6 @@ function CoffeeMachine(power) {
 }
 
 var coffeeMachine = new CoffeeMachine(10000);
-coffeeMachine.run(); // ошибка, кофеварка выключена!
+coffeeMachine.enable();
+coffeeMachine.run();
+coffeeMachine.disable(); // остановит работу, ничего не выведет
